@@ -1,5 +1,8 @@
+import "./record.css";
 export default function record(){
     return(
-        <div>기록</div>
+        <div className="RecordAll">
+        <div className="RecordText">기록</div>
+        </div>
     )
 }
