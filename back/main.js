@@ -4,14 +4,16 @@ const cors = require('cors');
 const { createProxyMiddleware } = require('http-proxy-middleware');
 
 app.use(cors({
-    origin: '*'  // 모든 도메인의 접근을 허용
+    origin: 'http://localhost:3000', // React 앱 도메인
+    credentials: true,
 }));
 app.set('views',__dirname + '/views');
 app.set('view engine','ejs');
 
 //사용자 정의 모듈
 
-var recordRouter=require('./router/recordRouter')
+const recordRouter=require('./router/recordRouter')
+const categoryRouter=require('./router/categoryRouter')
 // 세션 모듈, 세션 DB 저장 모듈
 var session = require('express-session'); 
 var MySqlStore = require('express-mysql-session')(session);
@@ -38,5 +40,6 @@ app.use(bodyParser.json());
 
 app.use('/record',recordRouter);
 
+app.use('/category',categoryRouter);
   
 app.listen(3001, () => console.log('Example app listening on port 3001'))  
