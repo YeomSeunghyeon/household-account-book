@@ -34,6 +34,10 @@ export default function record(){
           }
         }
        };
+       const categoryName=(num)=>{
+         const matchCategory=category.find((cate)=>cate.num===num);
+         return matchCategory ? matchCategory.name : "없음";
+       };
     return(
         <div className="RecordAll">
         <div className="RecordText">기록</div>
@@ -41,7 +45,7 @@ export default function record(){
             return(<div key={it.id}>
                 <div>{it.title}</div>
                 <div>{it.price}</div>
-                <div>{it.num}</div>
+                <div>{categoryName(it.num)  }</div>
                 <div>{it.detail}</div>
                 <div>{it.date}</div>
             </div>)
