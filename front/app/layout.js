@@ -8,7 +8,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body>
       <header>
-       <div className="HeaderText"> 염승현님의 가계부 </div>
+      <Link href="/" className="HeaderText">염승현님의 가계부</Link>
        <Link href="/page/record" className="HeaderItem">기록</Link>
        <Link href="/page/statistics" className="HeaderItem">통계</Link>
        <Link href="/page/add" className="HeaderItem">추가</Link>

@@ -44,3 +44,9 @@ footer{
   color: white;
   height: 5em;
 }
+/*   page.js    */
+
+.MainImage{
+  margin-left: 35%;
+  margin-top: 10%;
+}

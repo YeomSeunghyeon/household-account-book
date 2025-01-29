@@ -4,4 +4,15 @@
 }
 .RecordText{
     font-size: 30px;
+    margin-bottom: 3%;
+}
+.RecordItemAll{
+  margin-top: 2%;
+  border: 3px solid gray;
+  border-radius:30px;
+  width: 50%;
+}
+.RecordItemTitle,.RecordItemPrice,.RecordItemCategory,.RecordItemDetail,.RecordItemDate{
+ margin-top: 1%;
+ margin-left: 5%;
 }
