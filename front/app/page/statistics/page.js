@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import "./statistics.css";
 import axios from "axios"
+import { PieChart, Pie, Tooltip, Cell } from "recharts"; 
 export default function statistics(){
     const [data,setData]=useState([]);
     const [category,setCategory]=useState([]);
@@ -64,28 +65,45 @@ export default function statistics(){
             const matchCategory=category.find((cate)=>cate.num===num);
             return matchCategory?matchCategory.name:"없음"
         }
+         const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#A28BE0", "#FF6384", "#36A2EB"];
+
     return(
         <div className="StatisticsAll">
             <div className="StatisticsText">통계</div>
-            <div>{priceCount&&priceCount.map((it)=>{
-                return(
-                    <div key={it.num}>
-                    <div>{categoryName(it.num)}
-
-                    </div>
-                    <div>{it.price}</div>
-                    </div>
-                )
-            })}</div>
-            <div>{count&&count.map((it)=>{
-                return(
-                    <div key={it.num}>
-                        <div>{categoryName(it.num)}</div>
-                        <div>{it.counts}</div>
-                        </div>
-                )
-            })}
+             <PieChart width={500} height={500}>
+        <Pie
+          data={priceCount}
+          dataKey="price"
+          nameKey="num"
+          cx="40%"
+          cy="40%"
+          outerRadius={150}
+          fill="#8884d8"
+          label={({ num }) => categoryName(num)} 
+        >
+          {priceCount.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} /> 
+          ))}
+        </Pie>
+        <Tooltip />
+        </PieChart>
+        <PieChart width={500} height={500}>
+        <Pie
+          data={count}
+          dataKey="counts"
+          nameKey="num"
+          cx="40%"
+          cy="40%"
+          outerRadius={150}
+          fill="#8884d8"
+          label={({ num }) => categoryName(num)} 
+        >
+          {count.map((entry, index) => (
+            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} /> 
+          ))}
+        </Pie>
+        <Tooltip />
+      </PieChart>
             </div>
-        </div>
     )
 }
