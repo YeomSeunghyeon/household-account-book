@@ -6,3 +6,10 @@
     font-size: 30px;
     margin-bottom: 3%;
 }
+.StatisticsContainer {
+    display: flex; 
+  }
+.StatisticsText1{
+    font-size: 25px;
+    margin-left: 33%;
+}

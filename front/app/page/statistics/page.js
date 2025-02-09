@@ -70,6 +70,9 @@ export default function statistics(){
     return(
         <div className="StatisticsAll">
             <div className="StatisticsText">통계</div>
+            <div className="StatisticsContainer">
+              <div>
+            <div className="StatisticsText1">가격합</div>
              <PieChart width={500} height={500}>
         <Pie
           data={priceCount}
@@ -85,8 +88,19 @@ export default function statistics(){
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} /> 
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip content={({payload})=>{
+            if (!payload || payload.length === 0) return null;
+             const data = payload[0].payload; 
+             const price = data.price ? data.price.toLocaleString() : "데이터 없음";
+             return(
+              <div style={{ backgroundColor: "white", padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}
+              > <p>{data.price.toLocaleString()}원</p> </div>
+             )
+        }}/>
         </PieChart>
+        </div>
+        <div>
+        <div className="StatisticsText1">개수</div>
         <PieChart width={500} height={500}>
         <Pie
           data={count}
@@ -102,8 +116,19 @@ export default function statistics(){
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} /> 
           ))}
         </Pie>
-        <Tooltip />
+        <Tooltip content={({payload})=>{
+          if(!payload || payload.length===0)return null;
+          const data=payload[0].payload;
+          const count=data.counts ? data.counts : "데이터 없음";
+          return(
+            <div style={{ backgroundColor: "white", padding: "10px", borderRadius: "5px", border: "1px solid #ddd" }}>
+              <p>{count}개</p>
+            </div>
+          )
+        }}/>
       </PieChart>
+            </div>
+            </div>
             </div>
     )
 }
