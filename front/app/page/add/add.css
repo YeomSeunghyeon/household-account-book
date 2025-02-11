@@ -1,0 +1,45 @@
+.addAll{
+    margin-top: 3%;
+    margin-left: 34%;
+    border: 1px solid black;
+    width: 35%;
+    border-radius: 50px;
+}
+.addText{
+    font-size: 30px;
+    text-align: center;
+}
+.titleAll,.priceAll,.detailAll,.categoryAll{
+  margin-top: 5%;
+  display: flex;
+  margin-left: 4%;
+}
+.detailAll{
+    margin-bottom: 20%;
+}
+.titleInput{
+    margin-left: 10%;
+    width: 50%;
+    height: 2em;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.priceInput{
+    margin-left: 1%;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.detailInput{
+    margin-left: 10%;
+    width: 60%;
+    height: 6em;
+    border: 2px solid black;
+    border-radius: 10px;
+}
+.categorySelect{
+    margin-left: 12%;
+}
+.titleText,.priceText,.detailText,.categoryText{
+    align-items: center;
+    display: flex;
+}
