@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./add.css";
 import axios from "axios";
 import Select from "react-select";
+import { useRouter } from "next/navigation";
 
 export default function add(){
     const [title,setTitle]=useState("");
@@ -11,7 +12,8 @@ export default function add(){
     const [detail,setDetail]=useState("");
     const [date,setDate]=useState("");
     const [category,setCategory]=useState([]);
-    const [selectedOption, setSelectedOption] = useState(null); 
+    const router=useRouter();
+
     useEffect(() => {
         const interval = setInterval(() => {
           setDate(new Date().toLocaleString()); // 현재 시간 갱신
@@ -21,6 +23,7 @@ export default function add(){
       }, []);
 
       useEffect(()=>{
+
        categoryData();
       },[])
       const categoryData=async()=>{
@@ -34,6 +37,36 @@ export default function add(){
               alert(error.response.data.message);
           }
         }
+       };
+       const [isSubmitted, setIsSubmitted] = useState(false);
+
+       useEffect(() => {
+         if (isSubmitted) {
+           alert("추가 되었습니다");
+           router.push("/page/record");
+         }
+       }, [isSubmitted]);
+       
+       const handleSubmit = async () => {
+         try {
+           const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add/new`, {
+             title,
+             price,
+             num: num?.num,
+             detail,
+             date,
+           });
+       
+           if (response.status >= 200 && response.status < 300) {
+             setIsSubmitted(true);
+           } else {
+             alert("추가에 실패했습니다.");
+           }
+         } catch (error) {
+           console.error("오류 발생:", error.response || error);
+           alert(error.response?.data?.message || "서버 오류가 발생했습니다.");
+           router.push("/");
+         }
        };
     return(
         <div className="addAll">
@@ -61,6 +94,7 @@ export default function add(){
                 <div  className="detailText">지출 내용</div>
                 <textarea className="detailInput" onChange={(e)=>setDetail(e.target.value)}/>
             </div>
+            <button className="addButton" onClick={handleSubmit}>완료</button>
         </div>
     )
 }

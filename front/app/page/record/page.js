@@ -38,6 +38,7 @@ export default function record(){
          const matchCategory=category.find((cate)=>cate.num===num);
          return matchCategory ? matchCategory.name : "없음";
        };
+      
     return(
         <div className="RecordAll">
         <div className="RecordText">기록</div>
