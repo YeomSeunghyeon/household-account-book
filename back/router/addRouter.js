@@ -11,16 +11,15 @@ router.post("/new",(req,res)=>{
     const date=req.body.date;
     db.query("insert into content(title,price,num,detail,date) values (?,?,?,?,?)",[title,price,num,detail,date],
         (err,results)=>{
-        if(err){
-            console.error('Database query error: ', err);
-            res.status(500).send('Internal Server Error');
-            return;
-        }
-        if (results.length > 0) {
-           res.send(results)
-        } else {
-            res.status(401).send('Invalid credentials');
-        }
+            if(err){
+                res.status(500).send('Internal Server Error');
+                return;
+            }
+            else if(results){
+                res.status(200).send('success');
+            }else {
+                res.status(401).send('Invalid credentials');
+            }
     })
 })
 

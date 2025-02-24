@@ -38,36 +38,31 @@ export default function add(){
           }
         }
        };
-       const [isSubmitted, setIsSubmitted] = useState(false);
 
-       useEffect(() => {
-         if (isSubmitted) {
-           alert("추가 되었습니다");
-           router.push("/page/record");
-         }
-       }, [isSubmitted]);
+
+  
        
        const handleSubmit = async () => {
-         try {
-           const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add/new`, {
-             title,
-             price,
-             num: num?.num,
-             detail,
-             date,
-           });
-       
-           if (response.status >= 200 && response.status < 300) {
-             setIsSubmitted(true);
-           } else {
-             alert("추가에 실패했습니다.");
-           }
-         } catch (error) {
-           console.error("오류 발생:", error.response || error);
-           alert(error.response?.data?.message || "서버 오류가 발생했습니다.");
-           router.push("/");
-         }
-       };
+        try {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/add/new`, {
+            title,
+            price,
+            num: num?.num,
+            detail,
+            date,
+          });
+      
+          if (response.status === 200) {
+            alert("성공");
+            router.push("/page/record"); // 성공 시 "/add" 페이지로 이동
+          } else {
+            throw new Error("서버 응답 실패");
+          }
+        } catch (error) {
+          alert("실패: " + error.message);
+          router.push("/"); // 실패 시 "/" 페이지로 이동
+        }
+      };
     return(
         <div className="addAll">
             <div className="addText">지출 추가하기</div>
