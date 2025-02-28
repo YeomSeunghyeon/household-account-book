@@ -43,13 +43,16 @@ export default function record(){
         <div className="RecordAll">
         <div className="RecordText">기록</div>
         {data&&data.map((it)=>{
-            return(<div key={it.id} className="RecordItemAll">
+            return(
+            <div className="RecordItemAll"><div key={it.id} className="RecordItem">
                 <div className="RecordItemTitle">주제:{it.title}</div>
                 <div className="RecordItemPrice">소비액:{it.price}</div>
                 <div className="RecordItemCategory">카테고리:{categoryName(it.num)  }</div>
                 <div className="RecordItemDetail">내용:{it.detail}</div>
                 <div className="RecordItemDate">날짜:{it.date}</div>
-            </div>)
+                
+            </div>
+            <button className="RecordDeleteButton">삭제</button></div>)
         })}
         </div>
     )

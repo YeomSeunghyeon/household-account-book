@@ -7,12 +7,27 @@
     margin-bottom: 3%;
 }
 .RecordItemAll{
-  margin-top: 2%;
-  border: 3px solid gray;
-  border-radius:30px;
+  border: 1px solid black;
   width: 50%;
+  display: flex;
+  margin-top: 2%;
+  border-radius: 30px;
+  overflow: hidden; /*  부모의 모양 따라감   */
 }
+.RecordItem{
+  width: 90%;
+}
+
 .RecordItemTitle,.RecordItemPrice,.RecordItemCategory,.RecordItemDetail,.RecordItemDate{
  margin-top: 1%;
  margin-left: 5%;
+}
+.RecordDeleteButton{
+  width: 10%;
+  background-color: red;
+  color: white;
+  border-left: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
