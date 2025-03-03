@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 import "./record.css";
 import axios from "axios"
+import { useRouter } from "next/navigation";
 export default function record(){
     const [data,setData]=useState([]);
     const [category,setCategory]=useState([]);
+       const router=useRouter();
     useEffect(()=>{
      fetchData();
      categoryData();
@@ -38,6 +40,23 @@ export default function record(){
          const matchCategory=category.find((cate)=>cate.num===num);
          return matchCategory ? matchCategory.name : "없음";
        };
+       const handelDelete = async (id) => {
+        try {
+          const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/record/delete`, {
+            id:id
+          });
+      
+          if (response.status === 200) {
+            alert("성공");
+           window.location.reload();
+          } else {
+            throw new Error("서버 응답 실패");
+          }
+        } catch (error) {
+          alert("실패: " + error.message);
+          router.push("/"); // 실패 시 "/" 페이지로 이동
+        }
+      };
       
     return(
         <div className="RecordAll">
@@ -52,7 +71,7 @@ export default function record(){
                 <div className="RecordItemDate">날짜:{it.date}</div>
                 
             </div>
-            <button className="RecordDeleteButton">삭제</button></div>)
+            <button className="RecordDeleteButton" onClick={()=>handelDelete(it.id)}>삭제</button></div>)
         })}
         </div>
     )
